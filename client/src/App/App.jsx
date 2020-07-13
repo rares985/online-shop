@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Home from '@material-ui/icons/Home';
+import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import StoreIcon from '@material-ui/icons/Store';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { Router, navigate } from '@reach/router';
 import { connect } from 'react-redux';
-
-// import SearchAppBar from '../components/SearchAppBar';
 
 import Login from '../pages/Login';
 import Catalog from '../pages/Catalog';
@@ -25,7 +26,7 @@ const links = [
   {
     text: 'Acasă',
     path: '/',
-    icon: <Home />,
+    icon: <HomeIcon />,
     afterDivider: false,
   },
   {
@@ -35,12 +36,24 @@ const links = [
     afterDivider: true,
   },
   {
+    text: 'Autentificare',
+    path: '/login',
+    icon: <LockOpenIcon />,
+    afterDivider: false,
+  },
+  {
     text: 'Catalog',
     path: '/catalog',
     icon: <StoreIcon />,
     afterDivider: true,
   },
 ];
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: theme.palette.primary,
+  },
+}));
 
 const App = (props) => {
   /* eslint-disable no-unused-vars */
@@ -52,19 +65,22 @@ const App = (props) => {
     }
   }, [finished]);
 
+  // eslint-disable-next-line no-unused-vars
+  const classes = useStyles();
+
   return (
     <>
       {/* <SearchAppBar /> */}
       <ResponsiveDrawerWithSearchbar title="Magazin online" links={links}>
-        <Container component="main" maxWidth="lg">
-          <CssBaseline>
+        <CssBaseline>
+          <Container fluid maxWidth="lg">
             <Router>
               <Login path="/login" />
               <Catalog path="/catalog" />
               <ShoppingCart path="/cart" />
             </Router>
-          </CssBaseline>
-        </Container>
+          </Container>
+        </CssBaseline>
       </ResponsiveDrawerWithSearchbar>
     </>
   );

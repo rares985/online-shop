@@ -19,7 +19,14 @@ import CheckoutLabel from '../components/CheckoutLabel';
 import { AddItemToCart, RemoveItemFromCart } from '../actions/cartActions';
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  child: {
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
 }));
 
 const mapStateToProps = (state) => ({
@@ -52,7 +59,10 @@ const ShoppingCart = (props) => {
   return (
     <CssBaseline>
       <Container fluid className={classes.root}>
-        <Paper>
+        <Paper elevation={8} className={classes.child}>
+          <Typography variant="h3" component="h2">
+            Coș de cumpărături
+          </Typography>
           <List>
             {productsInCart.map((item) => (
               <ShoppingCartItem
@@ -65,7 +75,7 @@ const ShoppingCart = (props) => {
             ))}
           </List>
         </Paper>
-        <Paper>
+        <Paper elevation={8}>
           <CheckoutLabel />
         </Paper>
       </Container>

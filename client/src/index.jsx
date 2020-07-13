@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
-import { roRO } from '@material-ui/core/locale';
+import { ThemeProvider } from '@material-ui/core/styles';
+
 import DateFnsUtils from '@date-io/date-fns';
 import 'date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -11,9 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App/App';
 import store from './store/index';
 
-let theme = createMuiTheme(roRO);
-
-theme = responsiveFontSizes(theme);
+import theme from './theme';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
