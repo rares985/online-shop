@@ -6,6 +6,7 @@ import footerReducer from './footerReducer';
 import commonReducer from './commonReducer';
 import productReducer from './productReducer';
 import catalogReducer from './catalogReducer';
+import cartReducer from './cartReducer';
 import paymentReducer from './paymentReducer';
 
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
   common: commonReducer,
   product: productReducer,
   catalog: catalogReducer,
+  cart: cartReducer,
   payment: paymentReducer,
 });

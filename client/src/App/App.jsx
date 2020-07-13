@@ -2,18 +2,45 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Home from '@material-ui/icons/Home';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import StoreIcon from '@material-ui/icons/Store';
 
 import { Router, navigate } from '@reach/router';
 import { connect } from 'react-redux';
 
-import SearchAppBar from '../components/SearchAppBar';
+// import SearchAppBar from '../components/SearchAppBar';
 
 import Login from '../pages/Login';
+import Catalog from '../pages/Catalog';
+import ShoppingCart from '../pages/ShoppingCart';
+import ResponsiveDrawerWithSearchbar from '../components/ResponsiveDrawerWithSearchbar';
 
 const mapStateToProps = (state) => ({
   user: state.login.user,
   finished: state.login.finished,
 });
+
+const links = [
+  {
+    text: 'Acasă',
+    path: '/',
+    icon: <Home />,
+    afterDivider: false,
+  },
+  {
+    text: 'Coș',
+    path: '/cart',
+    icon: <ShoppingCartIcon />,
+    afterDivider: true,
+  },
+  {
+    text: 'Catalog',
+    path: '/catalog',
+    icon: <StoreIcon />,
+    afterDivider: true,
+  },
+];
 
 const App = (props) => {
   /* eslint-disable no-unused-vars */
@@ -27,14 +54,18 @@ const App = (props) => {
 
   return (
     <>
-      <SearchAppBar />
-      <Container component="main" maxWidth="xs">
-        <CssBaseline>
-          <Router>
-            <Login path="/login" />
-          </Router>
-        </CssBaseline>
-      </Container>
+      {/* <SearchAppBar /> */}
+      <ResponsiveDrawerWithSearchbar title="Magazin online" links={links}>
+        <Container component="main" maxWidth="lg">
+          <CssBaseline>
+            <Router>
+              <Login path="/login" />
+              <Catalog path="/catalog" />
+              <ShoppingCart path="/cart" />
+            </Router>
+          </CssBaseline>
+        </Container>
+      </ResponsiveDrawerWithSearchbar>
     </>
   );
 };
