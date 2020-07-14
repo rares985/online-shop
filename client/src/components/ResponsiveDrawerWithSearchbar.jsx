@@ -154,7 +154,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon/>
             </div>
             <InputBase
               placeholder={searchPlaceholder}

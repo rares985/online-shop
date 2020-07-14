@@ -4,13 +4,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import HomeIcon from '@material-ui/icons/Home';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+// import HomeIcon from '@material-ui/icons/Home';
+// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import StoreIcon from '@material-ui/icons/Store';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+// import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { Router, navigate } from '@reach/router';
 import { connect } from 'react-redux';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSignInAlt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 import Login from '../pages/Login';
 import Catalog from '../pages/Catalog';
@@ -26,19 +29,19 @@ const links = [
   {
     text: 'Acasă',
     path: '/',
-    icon: <HomeIcon />,
+    icon: <FontAwesomeIcon size="lg" icon={faHome} />,
     afterDivider: false,
   },
   {
     text: 'Coș',
     path: '/cart',
-    icon: <ShoppingCartIcon />,
+    icon: <FontAwesomeIcon size="lg" icon={faShoppingCart} />,
     afterDivider: true,
   },
   {
     text: 'Autentificare',
     path: '/login',
-    icon: <LockOpenIcon />,
+    icon: <FontAwesomeIcon size="lg" icon={faSignInAlt} />,
     afterDivider: false,
   },
   {

@@ -15,7 +15,9 @@ import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+// import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,7 +86,8 @@ const ProductCard = (props) => {
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
-          <AddShoppingCartIcon />
+          <FontAwesomeIcon icon={faCartPlus}/>
+          {/* <AddShoppingCartIcon /> */}
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
