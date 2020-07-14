@@ -56,28 +56,47 @@ const ShoppingCart = (props) => {
     DoRemoveItemFromCart(product);
   };
 
+  const ProductList = () => {
+    return (
+      <>
+        <Typography variant="h3" component="h2">
+          Coș de cumpărături
+        </Typography>
+      <List>
+        {productsInCart.map((item) => (
+          <ShoppingCartItem
+            title={item.product.title}
+            subtitle={item.count}
+            handleAddPiece={() => handleAddPiece(item.product)}
+            handleRemovePiece={() => handleRemovePiece(item.product)}
+            avatar={<BeachAccessIcon />}
+          />
+        ))}
+      </List>
+      </>
+    );
+  }
+
   return (
     <CssBaseline>
       <Container fluid className={classes.root}>
-        <Paper elevation={8} className={classes.child}>
-          <Typography variant="h3" component="h2">
-            Coș de cumpărături
-          </Typography>
-          <List>
-            {productsInCart.map((item) => (
-              <ShoppingCartItem
-                title={item.product.title}
-                subtitle={item.count}
-                handleAddPiece={() => handleAddPiece(item.product)}
-                handleRemovePiece={() => handleRemovePiece(item.product)}
-                avatar={<BeachAccessIcon />}
-              />
-            ))}
-          </List>
-        </Paper>
-        <Paper elevation={8}>
-          <CheckoutLabel />
-        </Paper>
+        {productsInCart.length !== 0 && (
+          <>
+            <Paper elevation={8} className={classes.child}>
+              <ProductList />
+            </Paper>
+            <Paper elevation={8}>
+              <CheckoutLabel />
+            </Paper>
+          </>
+        )}
+        {productsInCart.length === 0 && (
+          <Paper elevation={8} className={classes.child}>
+            <Typography variant="h5" component="h4">
+              Nu aveți niciun produs în coș
+            </Typography>
+          </Paper>
+        )}
       </Container>
     </CssBaseline>
   );

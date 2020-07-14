@@ -58,7 +58,7 @@ const ProductCard = (props) => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card elevation={10} className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>

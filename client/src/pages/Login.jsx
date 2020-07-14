@@ -8,10 +8,15 @@ import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import GoogleButton from 'react-google-button';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 import LoginAction from '../actions/LoginAction';
 
@@ -36,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  facebookButton: {
+    background: '#5890FF'
+  },
+  googleButton: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
+  }
 }));
 
 const mapStateToProps = (state) => ({
@@ -71,65 +83,77 @@ const Login = (props) => {
   }
 
   return (
-    <Paper elevation={4} className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Autentificare
-      </Typography>
-      <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Username"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={username}
-          error={error}
-          helperText={error ? 'Username/parola incorecta' : ''}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <MaskableTextField
-          margin="none"
-          required
-          fullWidth
-          name="password"
-          label="Parola"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          error={error}
-          helperText={error ? 'Username/parola incorecta' : ''}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          disabled={!validateForm()}
-        >
+    <Container maxWidth="sm">
+      <Paper elevation={4} className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
           Autentificare
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="http://google.com" variant="body2">
-              Am uitat parola
-            </Link>
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Username"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={username}
+            error={error}
+            helperText={error ? 'Username/parola incorecta' : ''}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <MaskableTextField
+            margin="none"
+            required
+            fullWidth
+            name="password"
+            label="Parola"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            error={error}
+            helperText={error ? 'Username/parola incorecta' : ''}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateForm()}
+          >
+            Autentificare
+          </Button>
+          <Button fullWidth variant="contained" color="primary" className={classes.submit}>
+            <FontAwesomeIcon icon={faFacebookF} />
+            Login with Facebook
+          </Button>
+          <GoogleButton
+          style={{
+            width: '100%',
+            marginBottom: '1em'
+          }}
+           type="light" />
+          <Grid container>
+            <Grid item xs>
+              <Link href="http://google.com" variant="body2">
+                Am uitat parola
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
-    </Paper>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 
