@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
@@ -34,7 +35,19 @@ const MaskableTextField = (props) => {
   const classes = useStyles();
   const [visible, setVisible] = useState(false);
 
-  const { value, onChange, fullWidth, required, margin, label, name, id, error } = props;
+  const {
+    value,
+    onChange,
+    fullWidth,
+    required,
+    margin,
+    label,
+    name,
+    id,
+    error,
+    variant,
+    autoComplete,
+  } = props;
 
   const handleClickShowPassword = () => {
     setVisible(!visible);
@@ -49,33 +62,62 @@ const MaskableTextField = (props) => {
   };
 
   return (
-    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+    <FormControl className={clsx(classes.margin, classes.textField)} variant={variant}>
       <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
-      <OutlinedInput
-        className={clsx(classes.input)}
-        type={visible ? 'text' : 'password'}
-        margin={margin}
-        required={required}
-        fullWidth={fullWidth}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        error={error}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-              edge="end"
-            >
-              {visible ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        }
-        labelWidth={70}
-      />
+      {variant === 'outlined' && (
+        <OutlinedInput
+          className={clsx(classes.input)}
+          type={visible ? 'text' : 'password'}
+          autoComplete={autoComplete}
+          margin={margin}
+          required={required}
+          fullWidth={fullWidth}
+          name={name}
+          id={id}
+          value={value}
+          onChange={onChange}
+          error={error}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {visible ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      )}
+      {variant === 'filled' && (
+        <FilledInput
+          className={clsx(classes.input)}
+          type={visible ? 'text' : 'password'}
+          margin={margin}
+          autoComplete={autoComplete}
+          required={required}
+          fullWidth={fullWidth}
+          name={name}
+          id={id}
+          value={value}
+          onChange={onChange}
+          error={error}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {visible ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      )}
     </FormControl>
   );
 };
@@ -83,12 +125,14 @@ const MaskableTextField = (props) => {
 MaskableTextField.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  autoComplete: PropTypes.string,
   fullWidth: PropTypes.bool,
   required: PropTypes.bool,
   margin: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['outlined', 'filled', 'normal']),
   error: PropTypes.bool,
 };
 
@@ -96,6 +140,8 @@ MaskableTextField.defaultProps = {
   fullWidth: true,
   required: true,
   error: false,
+  variant: 'outlined',
+  autoComplete: 'off',
 };
 
 export default MaskableTextField;

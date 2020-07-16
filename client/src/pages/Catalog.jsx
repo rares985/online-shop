@@ -31,9 +31,9 @@ const Catalog = (props) => {
 
   useEffect(() => {
     if (loading) {
-      DoFetchProducts({
-        howMany: 10,
-      });
+      // DoFetchProducts({
+      //   howMany: 10,
+      // });
     }
   }, [loading]);
 

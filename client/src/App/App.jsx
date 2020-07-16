@@ -4,20 +4,25 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-// import HomeIcon from '@material-ui/icons/Home';
-// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import StoreIcon from '@material-ui/icons/Store';
-// import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { Router, navigate } from '@reach/router';
 import { connect } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSignInAlt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faSignInAlt,
+  faShoppingCart,
+  faUserPlus,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 import Catalog from '../pages/Catalog';
 import ShoppingCart from '../pages/ShoppingCart';
+import PersonalAccount from '../pages/PersonalAccount';
 import ResponsiveDrawerWithSearchbar from '../components/ResponsiveDrawerWithSearchbar';
 
 const mapStateToProps = (state) => ({
@@ -31,6 +36,18 @@ const links = [
     path: '/',
     icon: <FontAwesomeIcon size="lg" icon={faHome} />,
     afterDivider: false,
+  },
+  {
+    text: 'Înregistrare',
+    path: '/register',
+    icon: <FontAwesomeIcon size="lg" icon={faUserPlus} />,
+    afterDivider: false,
+  },
+  {
+    text: 'Contul Meu',
+    path: '/account',
+    icon: <FontAwesomeIcon size="lg" icon={faUser} />,
+    afterDivider: true,
   },
   {
     text: 'Coș',
@@ -81,6 +98,8 @@ const App = (props) => {
               <Login path="/login" />
               <Catalog path="/catalog" />
               <ShoppingCart path="/cart" />
+              <Register path="/register" />
+              <PersonalAccount path="/account" />
             </Router>
           </Container>
         </CssBaseline>

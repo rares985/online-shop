@@ -13,6 +13,8 @@ import store from './store/index';
 
 import theme from './theme';
 
+import './assets/base.css';
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

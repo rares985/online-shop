@@ -59,23 +59,23 @@ const ShoppingCart = (props) => {
   const ProductList = () => {
     return (
       <>
-        <Typography variant="h3" component="h2">
+        <Typography variant="h3" component="h4">
           Coș de cumpărături
         </Typography>
-      <List>
-        {productsInCart.map((item) => (
-          <ShoppingCartItem
-            title={item.product.title}
-            subtitle={item.count}
-            handleAddPiece={() => handleAddPiece(item.product)}
-            handleRemovePiece={() => handleRemovePiece(item.product)}
-            avatar={<BeachAccessIcon />}
-          />
-        ))}
-      </List>
+        <List>
+          {productsInCart.map((item) => (
+            <ShoppingCartItem
+              title={item.product.title}
+              subtitle={item.count}
+              handleAddPiece={() => handleAddPiece(item.product)}
+              handleRemovePiece={() => handleRemovePiece(item.product)}
+              avatar={<BeachAccessIcon />}
+            />
+          ))}
+        </List>
       </>
     );
-  }
+  };
 
   return (
     <CssBaseline>

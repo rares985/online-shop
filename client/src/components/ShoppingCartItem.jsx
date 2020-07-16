@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -9,9 +11,15 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 import IconButton from '@material-ui/core/IconButton';
 
-const ShoppingCartItem = (props) => {
-  const { avatar, title, subtitle } = props;
+const useStyles = makeStyles((theme) => ({
+  avatar: {
+    backgroundColor: theme.palette.secondary.dark,
+  },
+}));
 
+const ShoppingCartItem = (props) => {
+  const classes = useStyles();
+  const { avatar, title, subtitle } = props;
   const { handleRemovePiece, handleAddPiece } = props;
 
   const count = `${subtitle} bucăți`;
@@ -19,7 +27,7 @@ const ShoppingCartItem = (props) => {
   return (
     <ListItem>
       <ListItemAvatar>
-        <Avatar>{avatar}</Avatar>
+        <Avatar className={classes.avatar}>{avatar}</Avatar>
       </ListItemAvatar>
       <ListItemText primary={title} />
       <IconButton onClick={handleRemovePiece}>

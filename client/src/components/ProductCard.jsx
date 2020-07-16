@@ -11,13 +11,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-// import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus, faChevronDown, faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    color: theme.palette.getContrastText(theme.palette.secondary.main),
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -69,7 +65,7 @@ const ProductCard = (props) => {
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <FontAwesomeIcon icon={faEllipsisV} />
           </IconButton>
         }
         title={headerText}
@@ -83,11 +79,10 @@ const ProductCard = (props) => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FontAwesomeIcon icon={faHeart} />
         </IconButton>
         <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
-          <FontAwesomeIcon icon={faCartPlus}/>
-          {/* <AddShoppingCartIcon /> */}
+          <FontAwesomeIcon icon={faCartPlus} />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -97,7 +92,7 @@ const ProductCard = (props) => {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          <FontAwesomeIcon icon={faChevronDown} />
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

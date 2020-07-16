@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -15,6 +16,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
 import { navigate } from '@reach/router';
 
@@ -91,9 +94,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const mapStateToProps = (state) => ({
+  user: state.login.user,
+});
+
 const ResponsiveDrawerWithSearchbar = (props) => {
   const { searchPlaceholder, title } = props;
-  const { window, links } = props;
+  const { window, links, user } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -154,7 +161,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon/>
+              <SearchIcon />
             </div>
             <InputBase
               placeholder={searchPlaceholder}
@@ -164,6 +171,13 @@ const ResponsiveDrawerWithSearchbar = (props) => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+          </div>
+          <div className={classes.toolbarButtons}>
+            {user !== '' && (
+              <IconButton color="inherit" onClick={() => alert('Favorites!')}>
+                <FontAwesomeIcon icon={faHeart} />
+              </IconButton>
+            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -202,9 +216,9 @@ const ResponsiveDrawerWithSearchbar = (props) => {
         <div className={classes.toolbar} />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
-            fill="#004643"
+            fill="#3b4a6b"
             fillOpacity="1"
-            d="M0,224L60,202.7C120,181,240,139,360,144C480,149,600,203,720,186.7C840,171,960,85,1080,58.7C1200,32,1320,64,1380,80L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
+            d="M0,288L48,272C96,256,192,224,288,192C384,160,480,128,576,133.3C672,139,768,181,864,213.3C960,245,1056,267,1152,229.3C1248,192,1344,96,1392,48L1440,0L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
           />
         </svg>
         {children}
@@ -226,6 +240,7 @@ ResponsiveDrawerWithSearchbar.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
 };
 
 ResponsiveDrawerWithSearchbar.defaultProps = {
@@ -233,4 +248,4 @@ ResponsiveDrawerWithSearchbar.defaultProps = {
   window: undefined,
 };
 
-export default ResponsiveDrawerWithSearchbar;
+export default connect(mapStateToProps)(ResponsiveDrawerWithSearchbar);

@@ -8,6 +8,8 @@ import productReducer from './productReducer';
 import catalogReducer from './catalogReducer';
 import cartReducer from './cartReducer';
 import paymentReducer from './paymentReducer';
+import registerReducer from './registerReducer';
+import personalReducer from './personalReducer';
 
 export default combineReducers({
   header: headerReducer,
@@ -16,6 +18,8 @@ export default combineReducers({
   common: commonReducer,
   product: productReducer,
   catalog: catalogReducer,
+  register: registerReducer,
+  account: personalReducer,
   cart: cartReducer,
   payment: paymentReducer,
 });
