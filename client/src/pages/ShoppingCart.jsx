@@ -79,7 +79,7 @@ const ShoppingCart = (props) => {
 
   return (
     <CssBaseline>
-      <Container fluid className={classes.root}>
+      <Container fluid="true" className={classes.root}>
         {productsInCart.length !== 0 && (
           <>
             <Paper elevation={8} className={classes.child}>

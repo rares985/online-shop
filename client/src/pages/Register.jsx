@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(theme.palette.secondary.main),
     backgroundColor: theme.palette.secondary.main,
   },
+  avatarIcon: {
+    animation: 'rotation 0.5s linear',
+  },
   socialMediaRegister: {
     padding: theme.spacing(2),
   },
@@ -75,7 +78,6 @@ const Register = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submitted');
   };
 
   const validateForm = () => {
@@ -87,8 +89,10 @@ const Register = (props) => {
       return false;
     }
     /* eslint-disable no-useless-escape */
+    /* eslint-disable max-len */
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     /* eslint-enable no-useless-escape */
+    /* eslint-enable max-len */
     return re.test(String(email).toLowerCase());
   };
 
@@ -96,7 +100,7 @@ const Register = (props) => {
     <Container maxWidth="sm">
       <Paper elevation={4} className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <FontAwesomeIcon icon={faLock} />
+          <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />
         </Avatar>
         <Typography component="h1" variant="h5">
           Înregistrare

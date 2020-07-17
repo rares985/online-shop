@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 
 const GoogleLogo = () => {
@@ -53,3 +54,4 @@ const GoogleLogo = () => {
 };
 
 export default GoogleLogo;
+/* eslint-enable max-len */

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   avatarIcon: {
-    animation: 'rotation 1s linear',
+    animation: 'rotation 0.5s linear',
   },
   form: {
     width: '100%', // Fix IE 11 issue.

@@ -16,6 +16,9 @@ import {
   faShoppingCart,
   faUserPlus,
   faUser,
+  faListAlt,
+  faCogs,
+  faTags,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Login from '../pages/Login';
@@ -33,7 +36,7 @@ const mapStateToProps = (state) => ({
 const links = [
   {
     text: 'Acasă',
-    path: '/',
+    path: '/home',
     icon: <FontAwesomeIcon size="lg" icon={faHome} />,
     afterDivider: false,
   },
@@ -48,6 +51,23 @@ const links = [
     path: '/account',
     icon: <FontAwesomeIcon size="lg" icon={faUser} />,
     afterDivider: true,
+    nested: [
+      {
+        text: 'Date personale',
+        path: '/personalinfo',
+        icon: <FontAwesomeIcon size="lg" icon={faListAlt} />,
+      },
+      {
+        text: 'Comenzile mele',
+        path: '/orders',
+        icon: <FontAwesomeIcon size="lg" icon={faTags} />,
+      },
+      {
+        text: 'Setări cont',
+        path: '/settings',
+        icon: <FontAwesomeIcon size="lg" icon={faCogs} />,
+      },
+    ],
   },
   {
     text: 'Coș',
@@ -93,13 +113,16 @@ const App = (props) => {
       {/* <SearchAppBar /> */}
       <ResponsiveDrawerWithSearchbar title="Magazin online" links={links}>
         <CssBaseline>
-          <Container fluid maxWidth="lg">
+          <Container fluid="true" maxWidth="lg">
             <Router>
-              <Login path="/login" />
-              <Catalog path="/catalog" />
-              <ShoppingCart path="/cart" />
               <Register path="/register" />
               <PersonalAccount path="/account" />
+
+              {/* After divider */}
+
+              <ShoppingCart path="/cart" />
+              <Login path="/login" />
+              <Catalog path="/catalog" />
             </Router>
           </Container>
         </CssBaseline>

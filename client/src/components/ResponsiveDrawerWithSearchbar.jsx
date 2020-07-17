@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -9,17 +11,15 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
-import { navigate } from '@reach/router';
+
+import SidebarLink from './SidebarLink';
 
 const drawerWidth = 240;
 
@@ -117,10 +117,13 @@ const ResponsiveDrawerWithSearchbar = (props) => {
         {links
           .filter((elem) => !elem.afterDivider)
           .map((link) => (
-            <ListItem onClick={() => navigate(link.path)} button key={link.text}>
-              <ListItemIcon>{link.icon}</ListItemIcon>
-              <ListItemText primary={link.text} />
-            </ListItem>
+            <SidebarLink
+              key={link.text}
+              path={link.path}
+              icon={link.icon}
+              text={link.text}
+              nested={link.nested}
+            />
           ))}
       </List>
       <Divider />
@@ -129,10 +132,13 @@ const ResponsiveDrawerWithSearchbar = (props) => {
         {links
           .filter((elem) => elem.afterDivider)
           .map((link) => (
-            <ListItem onClick={() => navigate(link.path)} button key={link.text}>
-              <ListItemIcon>{link.icon}</ListItemIcon>
-              <ListItemText primary={link.text} />
-            </ListItem>
+            <SidebarLink
+              path={link.path}
+              key={link.text}
+              icon={link.icon}
+              text={link.text}
+              nested={link.nested}
+            />
           ))}
       </List>
     </div>
@@ -174,7 +180,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
           </div>
           <div className={classes.toolbarButtons}>
             {user !== '' && (
-              <IconButton color="inherit" onClick={() => alert('Favorites!')}>
+              <IconButton color="inherit">
                 <FontAwesomeIcon icon={faHeart} />
               </IconButton>
             )}
@@ -214,6 +220,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        {/* eslint-disable max-len */}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="#3b4a6b"
@@ -221,6 +228,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
             d="M0,288L48,272C96,256,192,224,288,192C384,160,480,128,576,133.3C672,139,768,181,864,213.3C960,245,1056,267,1152,229.3C1248,192,1344,96,1392,48L1440,0L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
           />
         </svg>
+        {/* eslint-enable max-len */}
         {children}
       </main>
     </div>
@@ -234,8 +242,23 @@ ResponsiveDrawerWithSearchbar.propTypes = {
       afterDivider: PropTypes.bool,
       text: PropTypes.string.isRequired,
       path: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-    })
+      icon: PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.node.isRequired,
+        PropTypes.func.isRequired,
+      ]).isRequired,
+      nested: PropTypes.arrayOf(
+        PropTypes.exact({
+          text: PropTypes.string.isRequired,
+          path: PropTypes.string.isRequired,
+          icon: PropTypes.oneOfType([
+            PropTypes.element.isRequired,
+            PropTypes.node.isRequired,
+            PropTypes.func.isRequired,
+          ]).isRequired,
+        }).isRequired
+      ),
+    }).isRequired
   ).isRequired,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   searchPlaceholder: PropTypes.string,
