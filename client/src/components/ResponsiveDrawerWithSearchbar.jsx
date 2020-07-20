@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import SidebarLink from './SidebarLink';
+import ElementLogo from './ElementLogo';
 
 const drawerWidth = 240;
 
@@ -38,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+  },
+  toolBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -155,7 +161,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar elevation={0} position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className={classes.toolBar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -165,6 +171,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
           >
             <MenuIcon />
           </IconButton>
+          <ElementLogo />
           <Typography variant="h6" noWrap>
             {title}
           </Typography>

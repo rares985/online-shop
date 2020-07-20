@@ -114,7 +114,7 @@ const App = (props) => {
   return (
     <>
       {/* <SearchAppBar /> */}
-      <ResponsiveDrawerWithSearchbar title="Magazin online" links={links}>
+      <ResponsiveDrawerWithSearchbar title="Magazin online OnlineShop" links={links}>
         <CssBaseline>
           <Container fluid="true" maxWidth="lg">
             <Router>

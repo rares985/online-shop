@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(3, 1, 3, 1),
+    margin: theme.spacing(3, 2, 3, 2),
   },
   mouseIn: {
     transform: 'scale(1.05)',

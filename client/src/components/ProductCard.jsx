@@ -17,7 +17,16 @@ import { faCartPlus, faChevronDown, faHeart, faEllipsisV } from '@fortawesome/fr
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    transform: 'scale(1)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shorter,
+    }),
+    marginBottom: theme.spacing(3),
   },
+  mouseOver: {
+    transform: 'scale(1.05)',
+  },
+
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -41,6 +50,8 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [mouseOver, setMouseOver] = React.useState(false);
+  const [shadow, setShadow] = React.useState(1);
 
   const {
     headerText,
@@ -55,8 +66,26 @@ const ProductCard = (props) => {
     setExpanded(!expanded);
   };
 
+  const handleMouseOver = () => {
+    if (!expanded) {
+      setShadow(3);
+      setMouseOver(true);
+    }
+  };
+
+  const handleMouseOut = () => {
+    setMouseOver(false);
+    setShadow(1);
+  };
+
   return (
-    <Card elevation={10} className={classes.root}>
+    <Card
+      elevation={shadow}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      raised
+      className={clsx(classes.root, { [classes.mouseOver]: mouseOver })}
+    >
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>

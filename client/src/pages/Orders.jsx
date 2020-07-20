@@ -10,6 +10,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
+import Box from '@material-ui/core/Box';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faBan, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -20,8 +21,10 @@ import OrderPreview from '../components/OrderPreview';
 const useStyles = makeStyles((theme) => ({
   pageTitle: {
     textAlign: 'center',
+    marginBottom: theme.spacing(3),
+  },
+  root: {
     marginTop: theme.spacing(-5),
-    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -48,8 +51,8 @@ const Orders = (props) => {
   };
 
   return (
-    <Container maxWidth="lg" fluid="true">
-      <Typography variant="h2" element="h1" className={classes.pageTitle}>
+    <Container maxWidth="lg" fluid="true" className={classes.root}>
+      <Typography variant="h4" element="h1" className={classes.pageTitle}>
         Comenzile mele
       </Typography>
       <Paper elevation={4}>
