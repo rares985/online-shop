@@ -9,7 +9,7 @@ const ElementLogo = () => {
       viewBox="0 0 256 256"
       strokeLinecap="round"
       strokeLinejoin="round"
-      style={{ 'dominant-baseline': 'hanging' }}
+      style={{ dominantBaseline: 'hanging' }}
     >
       <rect width="256" height="256" fill="#3b4a6b" rx="16" ry="16" />
       <text

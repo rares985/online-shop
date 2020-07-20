@@ -18,6 +18,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    margin: theme.spacing(3, 2, 1, 2),
+    transform: 'scale(1)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shorter,
+    }),
+  },
   mouseIn: {
     transform: 'scale(1.05)',
   },
@@ -25,17 +32,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    transform: 'scale(1)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  paper: {
-    margin: theme.spacing(3, 2, 1, 2),
-    padding: theme.spacing(1, 0, 1, 0),
+    padding: theme.spacing(2, 1, 2, 1),
   },
   dialogTitle: {
-    background: theme.palette.primary.dark,
+    background: theme.palette.primary.main,
     color: theme.palette.getContrastText(theme.palette.primary.dark),
   },
 }));
@@ -45,6 +45,7 @@ const PaperListItem = (props) => {
   const [mouseIn, setMouseIn] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [address, setAddress] = React.useState('');
+  const [elevation, setElevation] = React.useState(4);
 
   const classes = useStyles();
 
@@ -60,15 +61,25 @@ const PaperListItem = (props) => {
     handleClose();
   };
 
+  const handleMouseEnter = () => {
+    setMouseIn(true);
+    setElevation(4);
+  };
+
+  const handleMouseLeave = () => {
+    setMouseIn(false);
+    setElevation(1);
+  };
+
   return (
     <>
       <Paper
-        onMouseEnter={() => setMouseIn(true)}
-        onMouseLeave={() => setMouseIn(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className={clsx(classes.paper, {
           [classes.mouseIn]: mouseIn,
         })}
-        elevation={mouseIn ? 10 : 2}
+        elevation={elevation}
       >
         <ListItem button key={text} className={classes.listItem} onClick={handleOpen}>
           <Typography variant="body2">{text}</Typography>

@@ -133,7 +133,6 @@ const Register = (props) => {
             label="Prenume"
             name="fname"
             autoComplete="given-name"
-            autoFocus
             value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
           />
@@ -146,7 +145,6 @@ const Register = (props) => {
             label="Nume"
             name="lname"
             autoComplete="family-name"
-            autoFocus
             value={lastName}
             onChange={(event) => setLastName(event.target.value)}
           />
@@ -160,7 +158,6 @@ const Register = (props) => {
             label="Email"
             name="email"
             autoComplete="email"
-            autoFocus
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -175,7 +172,6 @@ const Register = (props) => {
             label="Număr telefon"
             name="phonenumber"
             autoComplete="phone-number"
-            autoFocus
             value={phoneNumber}
             onChange={(event) => setPhoneNumber(event.target.value)}
           />

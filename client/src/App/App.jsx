@@ -19,6 +19,7 @@ import {
   faListAlt,
   faCogs,
   faTags,
+  faCreditCard,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Login from '../pages/Login';
@@ -29,6 +30,8 @@ import PersonalAccount from '../pages/PersonalAccount';
 import PersonalInfo from '../pages/PersonalInfo';
 import Orders from '../pages/Orders';
 import AccountSettings from '../pages/AccountSettings';
+import PaymentMethods from '../pages/PaymentMethods';
+import Checkout from '../pages/Checkout';
 import ResponsiveDrawerWithSearchbar from '../components/ResponsiveDrawerWithSearchbar';
 
 const mapStateToProps = (state) => ({
@@ -69,6 +72,11 @@ const links = [
         text: 'Setări cont',
         path: '/settings',
         icon: <FontAwesomeIcon size="lg" icon={faCogs} />,
+      },
+      {
+        text: 'Metode plată',
+        path: '/payment',
+        icon: <FontAwesomeIcon size="lg" icon={faCreditCard} />,
       },
     ],
   },
@@ -129,6 +137,8 @@ const App = (props) => {
               <Orders path="/orders" />
               <PersonalInfo path="/personalinfo" />
               <AccountSettings path="/settings" />
+              <PaymentMethods path="/payment" />
+              <Checkout path="/checkout" />
             </Router>
           </Container>
         </CssBaseline>

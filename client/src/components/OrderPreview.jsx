@@ -14,6 +14,10 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(3, 2, 3, 2),
+    transform: 'scale(1)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shorter,
+    }),
   },
   mouseIn: {
     transform: 'scale(1.05)',
@@ -22,10 +26,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    transform: 'scale(1)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
     padding: theme.spacing(2, 2, 2, 2),
   },
 }));
@@ -41,7 +41,7 @@ const OrderPreview = (props) => {
       className={clsx(classes.paper, {
         [classes.mouseIn]: mouseIn,
       })}
-      elevation={mouseIn ? 10 : 2}
+      elevation={mouseIn ? 4 : 1}
     >
       <ListItem className={classes.listItem} button onClick={() => alert('Clicked me!')}>
         <Typography variant="body1">ID: {id}</Typography>

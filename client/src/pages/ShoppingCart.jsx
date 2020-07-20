@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import clsx from 'clsx';
+import { navigate } from '@reach/router';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -94,6 +94,9 @@ const ShoppingCart = (props) => {
               </List>
             </div>
             <div className={`${classes.child} ${classes.totalSection}`}>
+              <Button variant="contained" onClick={() => navigate('/checkout')}>
+                Mergi spre plată
+              </Button>
               <Typography variant="h5" component="h5">
                 Total:{' '}
                 {productsInCart.reduce(
@@ -102,7 +105,6 @@ const ShoppingCart = (props) => {
                 )}{' '}
                 RON
               </Typography>
-              <Button variant="contained">Mergi spre plată</Button>
             </div>
           </>
         )}

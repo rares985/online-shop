@@ -22,20 +22,20 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({});
 
-const AccountSettings = (props) => {
+const PaymentMethods = (props) => {
   const { user } = props;
   const classes = useStyles();
   return (
     <Container maxWidth="md" fluid="true">
-      <div className={classes.root}>AccountSettings</div>
+      <div className={classes.root}>PaymentMethods</div>
     </Container>
   );
 };
 
-AccountSettings.propTypes = {
+PaymentMethods.propTypes = {
   user: PropTypes.bool.isRequired,
 };
 
-AccountSettings.defaultProps = {};
+PaymentMethods.defaultProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountSettings);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethods);

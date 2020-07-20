@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
   },
+  root: {
+    marginBottom: theme.spacing(5),
+  },
 }));
 
 const mapStateToProps = (state) => ({
@@ -71,7 +74,7 @@ const PersonalInfo = (props) => {
   ];
 
   return (
-    <Container maxWidth="lg" fluid="true">
+    <Container maxWidth="lg" fluid="true" className={classes.root}>
       {addressLists.map((addressList) => {
         return (
           <div className={classes.addressListContainer}>
