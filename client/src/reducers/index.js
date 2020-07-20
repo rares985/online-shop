@@ -10,6 +10,7 @@ import cartReducer from './cartReducer';
 import paymentReducer from './paymentReducer';
 import registerReducer from './registerReducer';
 import personalReducer from './personalReducer';
+import ordersReducer from './ordersReducer';
 
 export default combineReducers({
   header: headerReducer,
@@ -20,6 +21,7 @@ export default combineReducers({
   catalog: catalogReducer,
   register: registerReducer,
   account: personalReducer,
+  orders: ordersReducer,
   cart: cartReducer,
   payment: paymentReducer,
 });
