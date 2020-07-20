@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import clsx from 'clsx';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -12,9 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 import ShoppingCartItem from '../components/ShoppingCartItem';
-import CheckoutLabel from '../components/CheckoutLabel';
 
 import { AddItemToCart, RemoveItemFromCart } from '../actions/cartActions';
 
@@ -26,6 +28,17 @@ const useStyles = makeStyles((theme) => ({
   child: {
     marginBottom: theme.spacing(2),
     padding: theme.spacing(2),
+    background: theme.palette.primary.light,
+    color: theme.palette.getContrastText(theme.palette.primary.light),
+    borderRadius: theme.spacing(2),
+  },
+  itemPaper: {
+    marginTop: theme.spacing(2),
+  },
+  totalSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 }));
 
@@ -56,46 +69,49 @@ const ShoppingCart = (props) => {
     DoRemoveItemFromCart(product);
   };
 
-  const ProductList = () => {
-    return (
-      <>
-        <Typography variant="h3" component="h4">
-          Coș de cumpărături
-        </Typography>
-        <List>
-          {productsInCart.map((item) => (
-            <ShoppingCartItem
-              title={item.product.title}
-              subtitle={item.count}
-              handleAddPiece={() => handleAddPiece(item.product)}
-              handleRemovePiece={() => handleRemovePiece(item.product)}
-              avatar={<BeachAccessIcon />}
-            />
-          ))}
-        </List>
-      </>
-    );
-  };
-
   return (
     <CssBaseline>
-      <Container fluid="true" className={classes.root}>
+      <Container fluid="true" maxWidth="md" className={classes.root}>
         {productsInCart.length !== 0 && (
           <>
-            <Paper elevation={8} className={classes.child}>
-              <ProductList />
-            </Paper>
-            <Paper elevation={8}>
-              <CheckoutLabel />
-            </Paper>
+            <div className={classes.child}>
+              <Typography variant="h5" component="h5">
+                Coș de cumpărături
+              </Typography>
+              <List>
+                {productsInCart.map((item) => (
+                  <Paper className={classes.itemPaper} key={item.product.id}>
+                    <ShoppingCartItem
+                      title={item.product.title}
+                      count={item.count}
+                      pricePerUnit={item.product.price}
+                      handleAddPiece={() => handleAddPiece(item.product)}
+                      handleRemovePiece={() => handleRemovePiece(item.product)}
+                      avatar={<BeachAccessIcon />}
+                    />
+                  </Paper>
+                ))}
+              </List>
+            </div>
+            <div className={`${classes.child} ${classes.totalSection}`}>
+              <Typography variant="h5" component="h5">
+                Total:{' '}
+                {productsInCart.reduce(
+                  (accumulator, item) => accumulator + item.product.price * item.count,
+                  0
+                )}{' '}
+                RON
+              </Typography>
+              <Button variant="contained">Mergi spre plată</Button>
+            </div>
           </>
         )}
         {productsInCart.length === 0 && (
-          <Paper elevation={8} className={classes.child}>
-            <Typography variant="h5" component="h4">
+          <div className={classes.child}>
+            <Typography variant="h5" component="h5">
               Nu aveți niciun produs în coș
             </Typography>
-          </Paper>
+          </div>
         )}
       </Container>
     </CssBaseline>

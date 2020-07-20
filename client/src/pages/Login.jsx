@@ -67,7 +67,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
-
+  root: {
+    marginBottom: theme.spacing(5),
+  },
   expandOpen: {
     transform: 'rotate(180deg)',
   },
@@ -106,7 +108,7 @@ const Login = (props) => {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
         <Avatar className={classes.avatar}>
           <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />

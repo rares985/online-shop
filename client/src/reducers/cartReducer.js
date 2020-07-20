@@ -8,7 +8,39 @@ import {
 } from '../constants/action-types';
 
 const initialState = {
-  productsInCart: [],
+  // productsInCart: [],
+  productsInCart: [
+    {
+      product: {
+        id: '8f06ee8c-4e88-493f-a2ee-830f43324694',
+        title: 'Allan Davis',
+        description: '3 Squadron.',
+        image: 'http://hhhhold.com/s?7958290',
+        price: 25,
+      },
+      count: 1,
+    },
+    {
+      product: {
+        id: '8f06ee8c-4e88-493f-a2ee-830f43324695',
+        title: 'Allan Davis2',
+        description: '3 Squadron.',
+        image: 'http://hhhhold.com/s?7958290',
+        price: 20,
+      },
+      count: 2,
+    },
+    {
+      product: {
+        id: '8f06ee8c-4e88-493f-a2ee-830f43324696',
+        title: 'Allan Davis3',
+        description: '3 Squadron.',
+        image: 'http://hhhhold.com/s?7958290',
+        price: 5,
+      },
+      count: 3,
+    },
+  ],
 };
 
 const UpdateAdd = (array, newProduct) => {

@@ -26,6 +26,9 @@ import Register from '../pages/Register';
 import Catalog from '../pages/Catalog';
 import ShoppingCart from '../pages/ShoppingCart';
 import PersonalAccount from '../pages/PersonalAccount';
+import PersonalInfo from '../pages/PersonalInfo';
+import Orders from '../pages/Orders';
+import AccountSettings from '../pages/AccountSettings';
 import ResponsiveDrawerWithSearchbar from '../components/ResponsiveDrawerWithSearchbar';
 
 const mapStateToProps = (state) => ({
@@ -123,6 +126,9 @@ const App = (props) => {
               <ShoppingCart path="/cart" />
               <Login path="/login" />
               <Catalog path="/catalog" />
+              <Orders path="/orders" />
+              <PersonalInfo path="/personalinfo" />
+              <AccountSettings path="/settings" />
             </Router>
           </Container>
         </CssBaseline>

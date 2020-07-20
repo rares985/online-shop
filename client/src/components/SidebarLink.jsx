@@ -13,16 +13,16 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles((theme) => ({
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
   withLabel: {
     borderRadius: '0 3px 3px 0',
     background: '#FFFFFF',
     borderLeft: `3px solid ${theme.palette.primary.main}`,
     fontWeight: 'bold',
-    padding: '8px 16px',
+    padding: theme.spacing(1, 2),
     margin: theme.spacing(1),
+  },
+  nestedWithLabel: {
+    marginLeft: theme.spacing(3),
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SidebarLink = (props) => {
-  const { text, icon, path, nested, withLabel } = props;
+  const { text, icon, path, nested } = props;
+
+  const { withLabel, withIcons } = props;
 
   const hasChildren = nested.length !== 0;
 
@@ -56,7 +58,7 @@ const SidebarLink = (props) => {
   return (
     <>
       <ListItem button onClick={handleClick} className={clsx({ [classes.withLabel]: withLabel })}>
-        <ListItemIcon>{icon}</ListItemIcon>
+        {withIcons && <ListItemIcon>{icon}</ListItemIcon>}
         <ListItemText primary={text} />
         {hasChildren && (
           <ExpandMore
@@ -68,16 +70,16 @@ const SidebarLink = (props) => {
       </ListItem>
       {hasChildren && (
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding className={clsx({ [classes.withLabel]: withLabel })}>
+          <List component="div" disablePadding>
             {nested.map((child) => (
               <ListItem
                 onClick={() => navigate(child.path)}
                 button
                 key={child.text}
-                className={classes.nested}
+                className={clsx(classes.nestedWithLabel, { [classes.withLabel]: withLabel })}
               >
-                <ListItemIcon>{child.icon}</ListItemIcon>
-                <ListItemText primary={child.text} />
+                {withIcons && <ListItemIcon>{child.icon}</ListItemIcon>}
+                <ListItemText secondary={child.text} />
               </ListItem>
             ))}
           </List>
@@ -107,12 +109,14 @@ SidebarLink.propTypes = {
     }).isRequired
   ),
   withLabel: PropTypes.bool,
+  withIcons: PropTypes.bool,
 };
 
 SidebarLink.defaultProps = {
   path: '/',
   nested: [],
   withLabel: false,
+  withIcons: false,
 };
 
 export default SidebarLink;

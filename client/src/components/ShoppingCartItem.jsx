@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -19,10 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ShoppingCartItem = (props) => {
   const classes = useStyles();
-  const { avatar, title, subtitle } = props;
+  const { avatar, title, count, pricePerUnit } = props;
   const { handleRemovePiece, handleAddPiece } = props;
-
-  const count = `${subtitle} bucăți`;
 
   return (
     <ListItem>
@@ -33,18 +32,22 @@ const ShoppingCartItem = (props) => {
       <IconButton onClick={handleRemovePiece}>
         <RemoveIcon />
       </IconButton>
-      {count}
+      <Typography variant="body2">{`${count} bucăți`}</Typography>
       <IconButton onClick={handleAddPiece}>
         <AddIcon />
       </IconButton>
+      <Typography variant="body2">{` x ${pricePerUnit} RON = ${
+        pricePerUnit * count
+      } RON`}</Typography>
     </ListItem>
   );
 };
 
 ShoppingCartItem.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
   avatar: PropTypes.node.isRequired,
+  pricePerUnit: PropTypes.number.isRequired,
 
   handleRemovePiece: PropTypes.func.isRequired,
   handleAddPiece: PropTypes.func.isRequired,

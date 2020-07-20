@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(theme.palette.secondary.main),
     backgroundColor: theme.palette.secondary.main,
   },
+  logo: {
+    padding: theme.spacing(2),
+  },
   avatarIcon: {
     animation: 'rotation 0.5s linear',
   },
@@ -53,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  root: {
+    marginBottom: theme.spacing(5),
   },
 }));
 
@@ -97,7 +103,7 @@ const Register = (props) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
         <Avatar className={classes.avatar}>
           <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />

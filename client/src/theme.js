@@ -21,7 +21,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // const themeName = 'Regent St Blue Cream Sea Urchin';
 
 const palette = {
-  primary: { main: '#3b4a6b' },
+  primary: { main: '#3b4a6b', contrastText: '#FFFFFF' },
   secondary: { main: '#f0d43a' },
 };
 const themeName = 'Fiord Golden Dream Dolphin';

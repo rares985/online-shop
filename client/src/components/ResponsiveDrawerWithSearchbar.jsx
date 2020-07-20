@@ -118,6 +118,8 @@ const ResponsiveDrawerWithSearchbar = (props) => {
           .filter((elem) => !elem.afterDivider)
           .map((link) => (
             <SidebarLink
+              withLabel
+              withIcons
               key={link.text}
               path={link.path}
               icon={link.icon}
@@ -128,11 +130,12 @@ const ResponsiveDrawerWithSearchbar = (props) => {
       </List>
       <Divider />
       <List>
-        {/* TODO Check why dashboard appears before login */}
         {links
           .filter((elem) => elem.afterDivider)
           .map((link) => (
             <SidebarLink
+              withLabel
+              withIcons
               path={link.path}
               key={link.text}
               icon={link.icon}
