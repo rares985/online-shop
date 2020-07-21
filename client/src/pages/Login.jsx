@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-// import clsx from 'clsx';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+import grey from '@material-ui/core/colors/grey';
+import { navigate } from '@reach/router';
+import clsx from 'clsx';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -24,6 +30,12 @@ import LoginAction from '../actions/LoginAction';
 
 import MaskableTextField from '../components/MaskableTextField';
 
+const InsetTextField = withStyles({
+  root: {
+    boxShadow: 'inset 0 2px 2px hsla(0, 0%, 0%, 0.1)',
+  },
+})(TextField);
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
@@ -35,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     color: theme.palette.getContrastText(theme.palette.secondary.main),
     backgroundColor: theme.palette.secondary.main,
+  },
+  avatarContainer: {
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: theme.spacing(4),
+    marginBottom: theme.spacing(2),
   },
   avatarIcon: {
     animation: 'rotation 0.5s linear',
@@ -60,6 +77,30 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
 
+  paperNoAccount: {
+    padding: theme.spacing(0),
+    marginTop: theme.spacing(4),
+    transform: 'scale(1)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shorter,
+    }),
+    background: blueGrey[100],
+    color: blueGrey[900],
+  },
+  listItemNoAccount: {
+    padding: theme.spacing(0),
+    margin: theme.spacing(0),
+  },
+  listElementNoAccount: {
+    padding: theme.spacing(2),
+  },
+  mouseIn: {
+    transform: 'scale(1.05)',
+  },
+  noAccountText: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -69,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     marginBottom: theme.spacing(5),
+    marginTop: theme.spacing(-5),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
@@ -91,6 +133,7 @@ const Login = (props) => {
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [mouseIn, setMouseIn] = React.useState(false);
 
   const { error, onSubmitLoginRequest } = props;
 
@@ -110,14 +153,16 @@ const Login = (props) => {
   return (
     <Container maxWidth="sm" className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Autentificare
+        <Box border={1} borderColor={grey[900]} className={classes.avatarContainer}>
+          <Avatar className={classes.avatar}>
+            <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />
+          </Avatar>
+        </Box>
+        <Typography component="h1" variant="h4">
+          <Box letterSpacing={5}>Autentificare</Box>
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             required
@@ -129,6 +174,7 @@ const Login = (props) => {
             autoFocus
             value={username}
             error={error}
+            InputProps={{}}
             helperText={error ? 'Username/parola incorecta' : ''}
             onChange={(event) => setUsername(event.target.value)}
           />
@@ -148,7 +194,11 @@ const Login = (props) => {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label={<Typography variant="body2">Ține-mă minte</Typography>}
+            label={
+              <Typography variant="body2">
+                <Box fontWeight="fontWeightBold">Ține-mă minte</Box>
+              </Typography>
+            }
           />
           <Button
             type="submit"
@@ -163,18 +213,10 @@ const Login = (props) => {
           <Grid container>
             <Grid item xs>
               <Link href="http://google.com" variant="body2">
-                Am uitat parola
-              </Link>
-            </Grid>
-            <Grid item xs className={classes.linkAlignRight}>
-              <Link href="http://google.com" variant="body2">
-                Nu am cont
+                <Box fontWeight="fontWeightBold">Am uitat parola</Box>
               </Link>
             </Grid>
             <Grid container className={classes.socialMediaRegister}>
-              <Grid item xs={12} className={classes.socialMediaRegisterTitle}>
-                <Typography variant="h5">Autentificare cu</Typography>
-              </Grid>
               <Grid item xs={6} className={classes.socialMediaIcon}>
                 <Link href="http://facebook.com" variant="h3">
                   <FontAwesomeIcon color="#4267B2" icon={faFacebookF} />
@@ -188,6 +230,29 @@ const Login = (props) => {
             </Grid>
           </Grid>
         </form>
+      </Paper>
+      <Paper
+        onMouseEnter={() => setMouseIn(true)}
+        onMouseLeave={() => setMouseIn(false)}
+        className={clsx(classes.paperNoAccount, {
+          [classes.mouseIn]: mouseIn,
+        })}
+        elevation={2}
+      >
+        <List className={classes.listItemNoAccount}>
+          <ListItem
+            button
+            onClick={() => navigate('/register')}
+            className={classes.listElementNoAccount}
+          >
+            <Typography variant="body2" className={classes.noAccountText}>
+              <Box fontWeight={300} paddingRight={0.5}>
+                Nu ai cont?
+              </Box>
+              <Box fontWeight="fontWeightBold"> Fă-ți unul aici</Box>
+            </Typography>
+          </ListItem>
+        </List>
       </Paper>
     </Container>
   );

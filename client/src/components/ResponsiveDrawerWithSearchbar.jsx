@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
 
+import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
+
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -15,12 +18,27 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import SidebarLink from './SidebarLink';
 import ElementLogo from './ElementLogo';
+
+const SVGWave = () => {
+  return (
+    <Box>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill={blue[900]}
+          fillOpacity="1"
+          d="M0,288L48,272C96,256,192,224,288,192C384,160,480,128,576,133.3C672,139,768,181,864,213.3C960,245,1056,267,1152,229.3C1248,192,1344,96,1392,48L1440,0L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+        />
+      </svg>
+    </Box>
+  );
+};
 
 const drawerWidth = 240;
 
@@ -97,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    background: grey[200],
   },
 }));
 
@@ -230,13 +249,7 @@ const ResponsiveDrawerWithSearchbar = (props) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-          <path
-            fill="#3b4a6b"
-            fillOpacity="1"
-            d="M0,288L48,272C96,256,192,224,288,192C384,160,480,128,576,133.3C672,139,768,181,864,213.3C960,245,1056,267,1152,229.3C1248,192,1344,96,1392,48L1440,0L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-          />
-        </svg>
+        <SVGWave />
         {children}
       </main>
     </div>

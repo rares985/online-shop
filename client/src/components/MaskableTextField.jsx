@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+/* eslint-disable no-unused-vars */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+const InsetOutlinedInput = withStyles({
+  root: {
+    boxShadow: 'inset 0 2px 2px hsla(0, 0%, 0%, 0.1)',
+  },
+})(OutlinedInput);
+
+const InsetFilledInput = withStyles({
+  root: {
+    boxShadow: 'inset 0 2px 2px hsla(0, 0%, 0%, 0.1)',
+  },
+})(FilledInput);
 
 const HIDE_PASSWORD_DELAY_MS = 750;
 
@@ -28,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: 0,
     width: `100%`,
+  },
+  icon: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -65,7 +81,7 @@ const MaskableTextField = (props) => {
     <FormControl className={clsx(classes.margin, classes.textField)} variant={variant}>
       <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
       {variant === 'outlined' && (
-        <OutlinedInput
+        <InsetOutlinedInput
           className={clsx(classes.input)}
           type={visible ? 'text' : 'password'}
           autoComplete={autoComplete}
@@ -85,14 +101,14 @@ const MaskableTextField = (props) => {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {visible ? <VisibilityOff /> : <Visibility />}
+                <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} />
               </IconButton>
             </InputAdornment>
           }
         />
       )}
       {variant === 'filled' && (
-        <FilledInput
+        <InsetFilledInput
           className={clsx(classes.input)}
           type={visible ? 'text' : 'password'}
           margin={margin}
@@ -112,7 +128,11 @@ const MaskableTextField = (props) => {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {visible ? <VisibilityOff /> : <Visibility />}
+                <FontAwesomeIcon
+                  className={classes.icon}
+                  size="sm"
+                  icon={visible ? faEye : faEyeSlash}
+                />
               </IconButton>
             </InputAdornment>
           }

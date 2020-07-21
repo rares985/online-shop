@@ -12,6 +12,13 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
 
+/* eslint-disable no-unused-vars */
+import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
+import lime from '@material-ui/core/colors/lime';
+import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faBan, faSpinner } from '@fortawesome/free-solid-svg-icons';
 

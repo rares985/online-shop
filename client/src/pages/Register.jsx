@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -17,10 +18,17 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 import MaskableTextField from '../components/MaskableTextField';
 import GoogleLogo from '../components/Icons';
+
+const InsetTextField = withStyles({
+  root: {
+    boxShadow: 'inset 0 1px 1px hsla(0, 0%, 0%, 0.1)',
+  },
+})(TextField);
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,11 +42,16 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(theme.palette.secondary.main),
     backgroundColor: theme.palette.secondary.main,
   },
-  logo: {
-    padding: theme.spacing(2),
+  avatarContainer: {
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: theme.spacing(4),
+    marginBottom: theme.spacing(2),
   },
   avatarIcon: {
     animation: 'rotation 0.5s linear',
+  },
+  logo: {
+    padding: theme.spacing(2),
   },
   socialMediaRegister: {
     padding: theme.spacing(2),
@@ -105,14 +118,16 @@ const Register = (props) => {
   return (
     <Container maxWidth="sm" className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Înregistrare
+        <Box border={1} borderColor={grey[900]} className={classes.avatarContainer}>
+          <Avatar className={classes.avatar}>
+            <FontAwesomeIcon icon={faLock} className={classes.avatarIcon} />
+          </Avatar>
+        </Box>
+        <Typography component="h1" variant="h4">
+          <Box letterSpacing={5}>Înregistrare</Box>
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             required
@@ -124,7 +139,7 @@ const Register = (props) => {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             required
@@ -136,7 +151,7 @@ const Register = (props) => {
             value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
           />
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             required
@@ -149,7 +164,7 @@ const Register = (props) => {
             onChange={(event) => setLastName(event.target.value)}
           />
 
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             required
@@ -162,7 +177,7 @@ const Register = (props) => {
             onChange={(event) => setEmail(event.target.value)}
           />
 
-          <TextField
+          <InsetTextField
             variant="filled"
             margin="normal"
             type="tel"

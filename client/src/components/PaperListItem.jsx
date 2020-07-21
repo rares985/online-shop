@@ -87,7 +87,7 @@ const PaperListItem = (props) => {
         </ListItem>
       </Paper>
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth="lg">
         <DialogTitle className={classes.dialogTitle} id="form-dialog-title">
           Modifică adresă{' '}
         </DialogTitle>

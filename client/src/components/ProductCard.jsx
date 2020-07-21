@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import Card from '@material-ui/core/Card';
+
 import CardActions from '@material-ui/core/CardActions';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -26,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
   mouseOver: {
     transform: 'scale(1.05)',
   },
+  cardHeader: {},
 
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+    margin: theme.spacing(1, 1, 1, 1),
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -99,6 +102,7 @@ const ProductCard = (props) => {
         }
         title={headerText}
         subheader={subheaderText}
+        className={classes.cardHeader}
       />
       <CardMedia className={classes.media} image={imageUri} title={imageTitle} />
       <CardContent>

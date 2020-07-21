@@ -1,6 +1,12 @@
 import { roRO } from '@material-ui/core/locale';
 
 import { createMuiTheme } from '@material-ui/core/styles';
+/* eslint-disable no-unused-vars */
+import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
+import lime from '@material-ui/core/colors/lime';
+import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
 
 // const palette = {
 //   primary: { main: '#004643', contrastText: '#abd1c6' },
@@ -21,8 +27,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 // const themeName = 'Regent St Blue Cream Sea Urchin';
 
 const palette = {
-  primary: { main: '#3b4a6b', contrastText: '#FFFFFF' },
-  secondary: { main: '#f0d43a' },
+  primary: { main: blue[900], contrastText: '#FFFFFF' },
+  secondary: { main: lime.A200 },
 };
 const themeName = 'Fiord Golden Dream Dolphin';
 
