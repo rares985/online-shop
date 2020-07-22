@@ -32,6 +32,7 @@ import Orders from '../pages/Orders';
 import AccountSettings from '../pages/AccountSettings';
 import PaymentMethods from '../pages/PaymentMethods';
 import Checkout from '../pages/Checkout';
+import Home from '../pages/Home';
 import ResponsiveDrawerWithSearchbar from '../components/ResponsiveDrawerWithSearchbar';
 
 const mapStateToProps = (state) => ({
@@ -126,6 +127,7 @@ const App = (props) => {
         <CssBaseline>
           <Container fluid="true" maxWidth="lg">
             <Router>
+              <Home path="/home" />
               <Register path="/register" />
               <PersonalAccount path="/account" />
 

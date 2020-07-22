@@ -24,14 +24,17 @@ import { faCheckCircle, faBan, faSpinner } from '@fortawesome/free-solid-svg-ico
 
 import TabPanel from '../components/TabPanel';
 import OrderPreview from '../components/OrderPreview';
+import OrderIllustration from '../components/OrderIllustration';
 
 const useStyles = makeStyles((theme) => ({
-  pageTitle: {
-    textAlign: 'center',
-    marginBottom: theme.spacing(3),
+  titleContainer: {},
+  titleText: {
+    marginBottom: theme.spacing(-14),
   },
+  titleIllustration: {},
   root: {
-    marginTop: theme.spacing(-5),
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(15),
   },
 }));
 
@@ -58,10 +61,13 @@ const Orders = (props) => {
   };
 
   return (
-    <Container maxWidth="lg" fluid="true" className={classes.root}>
-      <Typography variant="h4" element="h1" className={classes.pageTitle}>
-        Comenzile mele
-      </Typography>
+    <Container maxWidth="sm" fluid="true" className={classes.root}>
+      <Box className={classes.titleContainer} maxWidth="md">
+        <Typography variant="h3" element="h1" className={classes.titleText}>
+          Comenzi
+        </Typography>
+        <OrderIllustration className={classes.titleIllustration} />
+      </Box>
       <Paper elevation={4}>
         <Tabs
           value={value}
