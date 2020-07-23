@@ -62,7 +62,7 @@ const Orders = (props) => {
 
   return (
     <Container maxWidth="sm" fluid="true" className={classes.root}>
-      <Box className={classes.titleContainer} maxWidth="md">
+      <Box className={classes.titleContainer} maxWidth="md" letterSpacing={300}>
         <Typography variant="h3" element="h1" className={classes.titleText}>
           Comenzi
         </Typography>

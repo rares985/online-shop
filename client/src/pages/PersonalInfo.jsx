@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import List from '@material-ui/core/List';
+import Box from '@material-ui/core/Box';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -17,17 +18,22 @@ import PaperListItem from '../components/PaperListItem';
 
 import FetchPersonalInfo from '../actions/personalActions';
 
+import InfoIllustration from '../components/InfoIllustration';
+
 const useStyles = makeStyles((theme) => ({
   addressListContainer: {
-    marginTop: theme.spacing(5),
     background: theme.palette.primary.light,
     color: theme.palette.getContrastText(theme.palette.primary.main),
     padding: theme.spacing(2),
     borderRadius: theme.spacing(1),
+    marginBottom: theme.spacing(5),
   },
   root: {
     marginBottom: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
   },
+  illustration: {},
 }));
 
 const mapStateToProps = (state) => ({
@@ -74,28 +80,35 @@ const PersonalInfo = (props) => {
   ];
 
   return (
-    <Container maxWidth="lg" fluid="true" className={classes.root}>
-      {addressLists.map((addressList) => {
-        return (
-          <div className={classes.addressListContainer}>
-            <Typography variant="h4" element="h1">
-              {loading ? <Skeleton /> : addressList.title}
-            </Typography>
-            <List component="div" disablePadding>
-              {addressList.list.map((address) => {
-                return loading ? (
-                  <Skeleton />
-                ) : (
-                  <PaperListItem
-                    text={address}
-                    icon={<FontAwesomeIcon icon={faPencilAlt} size="lg" />}
-                  />
-                );
-              })}
-            </List>
-          </div>
-        );
-      })}
+    <Container maxWidth="lg" fluid="true">
+      <Container maxWidth="sm" fluid="true">
+        <Box className={classes.illustration}>
+          <InfoIllustration />
+        </Box>
+      </Container>
+      <Container maxWidth="lg" fluid="true" className={classes.root}>
+        {addressLists.map((addressList) => {
+          return (
+            <div className={classes.addressListContainer}>
+              <Typography variant="h4" element="h1">
+                {loading ? <Skeleton /> : addressList.title}
+              </Typography>
+              <List component="div" disablePadding>
+                {addressList.list.map((address) => {
+                  return loading ? (
+                    <Skeleton />
+                  ) : (
+                    <PaperListItem
+                      text={address}
+                      icon={<FontAwesomeIcon icon={faPencilAlt} size="lg" />}
+                    />
+                  );
+                })}
+              </List>
+            </div>
+          );
+        })}
+      </Container>
     </Container>
   );
 };
